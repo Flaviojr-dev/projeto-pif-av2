@@ -61,3 +61,20 @@
  Temporizador: Registra o tempo decorrido desde o início da partida.
 
  Contador de Minas: Mostra quantas minas faltam ser marcadas (total de minas - bandeiras colocadas).
+
+## Fluxo do Jogo
+ 1.Inicialização:
+
+ O tabuleiro é gerado com minas em posições aleatórias.
+
+ Todas as células começam ocultas.
+
+ 2.Jogabilidade:
+
+ O jogador interage com o tabuleiro até vencer ou perder.
+
+ 3.Fim de Jogo:
+
+ Em caso de derrota, todas as minas são reveladas.
+
+ Em caso de vitória, o tempo final é registrado 

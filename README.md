@@ -14,7 +14,7 @@
 ## Mecânicas principais do jogo Campo Minado
 
     
- 1. Tabuleiro (Grid)
+1. Tabuleiro (Grid)
  O jogo ocorre em um grid bidimensional (matriz) de tamanho configurável (ex.: 8x8, 10x10, 16x16).
 
  Cada célula pode estar em um dos seguintes estados:

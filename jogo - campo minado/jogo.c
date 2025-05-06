@@ -1,12 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-/*
-    CELULA
-    eBomba 0 ou 1
-    estaAberta 0 ou 1
-    vizinhos 0 a 4
-*/
+
 typedef struct{
     int eBomba;
     int estaAberta;

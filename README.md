@@ -10,4 +10,55 @@
  David Alves
  
  Nestor França
- 
+
+## Mecânica do jogo Campo Minado
+ 1. Mecânicas Principais
+ 1.1. Tabuleiro (Grid)
+ O jogo ocorre em um grid bidimensional (matriz) de tamanho configurável (ex.: 8x8, 10x10, 16x16).
+
+ Cada célula pode estar em um dos seguintes estados:
+
+ Oculta: Não revelada (inicialmente todas estão assim).
+
+ Revelada: Mostra se é segura (número) ou uma mina.
+
+ Marcada: O jogador suspeita que há uma mina ali (bandeira).
+
+ 1.2. Mineração do Campo
+ Um número pré-definido de minas (N) é distribuído aleatoriamente pelo tabuleiro.
+
+ Ex.: Em um tabuleiro 8x8, pode-se ter 10 minas.
+
+ Regra de mineração:
+
+ As minas não podem ser colocadas na primeira célula clicada pelo jogador (para evitar derrota imediata).
+
+ 1.3. Sistema de Números nas Células
+ Células seguras revelam um número que indica quantas minas estão adjacentes a ela (em todas as 8 direções possíveis).
+
+ Se uma célula não tem minas adjacentes, ela é revelada como vazia e revela automaticamente todas as células vizinhas (recursão).
+
+ 1.4. Interações do Jogador
+ O jogador pode realizar duas ações principais:
+
+ Revelar Célula (Clique Esquerdo)
+
+ Se for uma mina → Fim de jogo (derrota).
+
+ Se for segura → Mostra o número ou abre células vazias automaticamente.
+
+ Marcar Célula (Clique Direito ou Tecla Específica)
+
+ Coloca uma bandeira onde o jogador suspeita de uma mina.
+
+ Impede cliques acidentais na célula marcada.
+
+ 1.5. Condições de Vitória e Derrota
+ Vitória: Todas as células sem minas são reveladas.
+
+ Derrota: O jogador revela uma célula com mina.
+
+ 1.6. Temporizador e Contador de Minas
+ Temporizador: Registra o tempo decorrido desde o início da partida.
+
+ Contador de Minas: Mostra quantas minas faltam ser marcadas (total de minas - bandeiras colocadas).

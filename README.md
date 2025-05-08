@@ -78,3 +78,26 @@
  Em caso de derrota, todas as minas são reveladas.
 
  Em caso de vitória, o tempo final é registrado 
+
+
+## Instruções para compilar e executar 
+  Pré-requisitos
+
+Estar em um ambiente Linux (ou WSL com Ubuntu).
+
+Ter o GCC e o make instalados no sistema.
+
+Estar dentro do diretório do projeto.
+
+Passos:
+
+-Como instalar o GCC e Make: bash: sudo apt update sudo apt install build-essential
+
+Ou escreva esse codigo aqui que ja vai instalar tudo e preparar seu ambiente: sudo apt update && sudo apt install -y build-essential
+
+-Acesse o diretório do projeto usando o WSL Ubuntu:
+
+cd "/home/kali/Desktop/jogo/projeto-pif-av2/jogo - campo minado" && gcc jogo.c cli-lib.c -o campo-minado -lncurses && ./campo-minado
+
+Execute o jogo: ./build/game
+

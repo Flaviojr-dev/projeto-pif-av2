@@ -1,7 +1,7 @@
 # projeto-pif-av2
 
 ## Equipe
- José Vitor
+ José Vitor - @josevvito
  
  Flávio Barbosa
  

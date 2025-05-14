@@ -57,8 +57,8 @@ void screenInit(int drawBorders)
     screenHomeCursor();
     screenHideCursor();
     
-    // Adicionando a configuração para as teclas especiais
-    keypad(stdscr, TRUE);  // Habilita teclas como as setas
+    
+    keypad(stdscr, TRUE);  
 }
     screenClear();
     if (drawBorders) screenDrawBorders(0, 0, 20, 10);
@@ -68,7 +68,7 @@ void screenInit(int drawBorders)
 
 void screenDestroy()
 {
-    printf("%s[0;39;49m", ESC); // Reset colors
+    printf("%s[0;39;49m", ESC); 
     screenSetNormal();
     screenClear();
     screenHomeCursor();

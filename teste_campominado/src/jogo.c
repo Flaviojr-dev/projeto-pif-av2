@@ -244,8 +244,80 @@ void desenharJogo() {
     refresh();
 }
 
+void desenharMenu() {
+    clear();
+    attron(A_BOLD);
+    box(stdscr, 0, 0);
+    attroff(A_BOLD);
+
+    int term_height, term_width;
+    getmaxyx(stdscr, term_height, term_width);
+
+    // Título do jogo
+    attron(COLOR_PAIR(4) | A_BOLD);
+    mvprintw(term_height/4, (term_width-20)/2, "CAMPO MINADO");
+    attroff(COLOR_PAIR(4) | A_BOLD);
+
+    // Opções do menu
+    attron(COLOR_PAIR(1));
+    mvprintw(term_height/2, (term_width-15)/2, "1. Novo Jogo");
+    mvprintw(term_height/2 + 2, (term_width-15)/2, "2. Como Jogar");
+    mvprintw(term_height/2 + 4, (term_width-15)/2, "3. Sair");
+    attroff(COLOR_PAIR(1));
+
+    refresh();
+}
+
+void mostrarInstrucoes() {
+    clear();
+    box(stdscr, 0, 0);
+
+    attron(COLOR_PAIR(4) | A_BOLD);
+    mvprintw(2, 2, "Como Jogar:");
+    attroff(COLOR_PAIR(4) | A_BOLD);
+
+    attron(COLOR_PAIR(1));
+    mvprintw(4, 2, "- Use as setas do teclado para mover o cursor");
+    mvprintw(5, 2, "- Pressione ENTER para revelar uma celula");
+    mvprintw(6, 2, "- Evite as bombas!");
+    mvprintw(7, 2, "- Revele todas as celulas sem bombas para vencer");
+    mvprintw(9, 2, "Pressione qualquer tecla para voltar ao menu...");
+    attroff(COLOR_PAIR(1));
+
+    refresh();
+    getch();
+}
+
+void desenharSelecaoDificuldade() {
+    clear();
+    attron(A_BOLD);
+    box(stdscr, 0, 0);
+    attroff(A_BOLD);
+
+    int term_height, term_width;
+    getmaxyx(stdscr, term_height, term_width);
+
+    // Título
+    attron(COLOR_PAIR(4) | A_BOLD);
+    mvprintw(term_height/4, (term_width-25)/2, "SELECIONE A DIFICULDADE");
+    attroff(COLOR_PAIR(4) | A_BOLD);
+
+    // Opções de dificuldade com detalhes
+    attron(COLOR_PAIR(1));
+    mvprintw(term_height/2 - 2, (term_width-35)/2, "1. Fácil    (10 bombas)");
+    mvprintw(term_height/2, (term_width-35)/2, "2. Médio    (20 bombas)");
+    mvprintw(term_height/2 + 2, (term_width-35)/2, "3. Difícil  (30 bombas)");
+    mvprintw(term_height/2 + 4, (term_width-35)/2, "ESC - Voltar ao menu");
+    attroff(COLOR_PAIR(1));
+
+    refresh();
+}
+
 void executarJogo() {
     static int ch = 0;
+    int estado = 0; // 0 = menu, 1 = seleção dificuldade, 2 = jogo
+    int num_bombas = 20; // valor padrão
+    
     setlocale(LC_ALL, "");
     initscr();
 
@@ -265,55 +337,106 @@ void executarJogo() {
     keypad(stdscr, TRUE);
     keyboardInit();
     resize_term(TAM*2 + 30, TAM*4 + 10);
-    inicializarJogo();
-    sortearBombas(20);
-    contarBombas();
-    box(stdscr, 0, 0);
-    desenharJogo();
 
-    while(ch != 27) {
-        if(keyhit()) {
+    while(ch != 27) { // ESC para sair
+        if(estado == 0) { // Menu principal
+            desenharMenu();
             ch = getch();
-            int houve_mudanca = 0;
-
-            if(!game_over && !vitoria) {
-                if(ch == KEY_UP && linha_selecionada > 0) {
-                    linha_selecionada--;
-                    houve_mudanca = 1;
-                }
-                else if(ch == KEY_DOWN && linha_selecionada < TAM-1) {
-                    linha_selecionada++;
-                    houve_mudanca = 1;
-                }
-                else if(ch == KEY_LEFT && coluna_selecionada > 0) {
-                    coluna_selecionada--;
-                    houve_mudanca = 1;
-                }
-                else if(ch == KEY_RIGHT && coluna_selecionada < TAM-1) {
-                    coluna_selecionada++;
-                    houve_mudanca = 1;
-                }
-                else if(ch == 10) {
-                    abrirCelula(linha_selecionada, coluna_selecionada);
-                    ganhou();
-                    houve_mudanca = 1;
-                }
-            }
-            else if((game_over || vitoria) && ch == '1') {
-                inicializarJogo();
-                sortearBombas(20);
-                contarBombas();
-                houve_mudanca = 1;
-            }
-
-            if(houve_mudanca) {
-                desenharJogo();
+            
+            switch(ch) {
+                case '1': // Novo Jogo
+                    estado = 1; // Vai para seleção de dificuldade
+                    break;
+                case '2': // Como Jogar
+                    mostrarInstrucoes();
+                    break;
+                case '3': // Sair
+                    ch = 27;
+                    break;
             }
         }
-        napms(50);
+        else if(estado == 1) { // Seleção de dificuldade
+            desenharSelecaoDificuldade();
+            ch = getch();
+            
+            switch(ch) {
+                case '1': // Fácil
+                    num_bombas = 10;
+                    estado = 2;
+                    inicializarJogo();
+                    sortearBombas(num_bombas);
+                    contarBombas();
+                    desenharJogo();
+                    break;
+                case '2': // Médio
+                    num_bombas = 20;
+                    estado = 2;
+                    inicializarJogo();
+                    sortearBombas(num_bombas);
+                    contarBombas();
+                    desenharJogo();
+                    break;
+                case '3': // Difícil
+                    num_bombas = 30;
+                    estado = 2;
+                    inicializarJogo();
+                    sortearBombas(num_bombas);
+                    contarBombas();
+                    desenharJogo();
+                    break;
+                case 27: // ESC - Voltar ao menu
+                    estado = 0;
+                    break;
+            }
+        }
+        else if(estado == 2) { // Jogo em andamento
+            if(keyhit()) {
+                ch = getch();
+                int houve_mudanca = 0;
+
+                if(!game_over && !vitoria) {
+                    if(ch == KEY_UP && linha_selecionada > 0) {
+                        linha_selecionada--;
+                        houve_mudanca = 1;
+                    }
+                    else if(ch == KEY_DOWN && linha_selecionada < TAM-1) {
+                        linha_selecionada++;
+                        houve_mudanca = 1;
+                    }
+                    else if(ch == KEY_LEFT && coluna_selecionada > 0) {
+                        coluna_selecionada--;
+                        houve_mudanca = 1;
+                    }
+                    else if(ch == KEY_RIGHT && coluna_selecionada < TAM-1) {
+                        coluna_selecionada++;
+                        houve_mudanca = 1;
+                    }
+                    else if(ch == 10) {
+                        abrirCelula(linha_selecionada, coluna_selecionada);
+                        ganhou();
+                        houve_mudanca = 1;
+                    }
+                    else if(ch == 27) { // ESC para voltar ao menu
+                        estado = 0;
+                        continue;
+                    }
+                }
+                else if((game_over || vitoria) && ch == '1') {
+                    estado = 0; // Volta para o menu principal
+                    continue;
+                }
+
+                if(houve_mudanca) {
+                    desenharJogo();
+                }
+            }
+            napms(50);
+        }
     }
 
     keyboardDestroy();
     endwin();
 }
+
+
 

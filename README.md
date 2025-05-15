@@ -97,7 +97,7 @@ Ou escreva esse codigo aqui que ja vai instalar tudo e preparar seu ambiente: su
 
 -Acesse o diretório do projeto usando o WSL Ubuntu:
 
-cd "/home/kali/Desktop/jogo/projeto-pif-av2/jogo - campo minado" && gcc jogo.c cli-lib.c -o campo-minado -lncurses && ./campo-minado
+cd "/mnt/c/Users/pedro/OneDrive/Área de Trabalho/teste_campominado"
 
 Execute o jogo: ./build/game
 

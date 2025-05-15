@@ -304,7 +304,7 @@ void desenharSelecaoDificuldade() {
 
     // Opções de dificuldade com detalhes
     attron(COLOR_PAIR(1));
-    mvprintw(term_height/2 - 2, (term_width-35)/2, "1. Fácil    (10 bombas)");
+    mvprintw(term_height/2 - 2, (term_width-35)/2, "1. Fácil    (15 bombas)");
     mvprintw(term_height/2, (term_width-35)/2, "2. Médio    (20 bombas)");
     mvprintw(term_height/2 + 2, (term_width-35)/2, "3. Difícil  (30 bombas)");
     mvprintw(term_height/2 + 4, (term_width-35)/2, "ESC - Voltar ao menu");
@@ -361,7 +361,7 @@ void executarJogo() {
             
             switch(ch) {
                 case '1': // Fácil
-                    num_bombas = 10;
+                    num_bombas = 15;
                     estado = 2;
                     inicializarJogo();
                     sortearBombas(num_bombas);

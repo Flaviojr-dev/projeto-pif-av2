@@ -31,12 +31,12 @@
  As minas não podem ser colocadas na primeira célula clicada pelo jogador (para evitar derrota imediata).
 
  1.2. Sistema de Números nas Células
- Células seguras revelam um número que indica quantas minas estão adjacentes a ela (em todas as 8 direções possíveis).
+ Células seguras revelam um número que indica quantas minas estão adjacentes a ela.
 
  Se uma célula não tem minas adjacentes, ela é revelada como vazia e revela automaticamente todas as células vizinhas (recursão).
 
  1.3. Interações do Jogador
- O jogador pode realizar duas ações principais:
+ O jogador realiza uma ação principal:
 
  Revelar Célula (Clique Esquerdo)
 
@@ -44,21 +44,20 @@
 
  Se for segura → Mostra o número ou abre células vazias automaticamente.
 
- Marcar Célula (Clique Direito ou Tecla Específica)
-
- Coloca uma bandeira onde o jogador suspeita de uma mina.
-
- Impede cliques acidentais na célula marcada.
-
  1.4. Condições de Vitória e Derrota
  Vitória: Todas as células sem minas são reveladas.
 
  Derrota: O jogador revela uma célula com mina.
 
- 1.5. Temporizador e Contador de Minas
- Temporizador: Registra o tempo decorrido desde o início da partida.
+## Pontuação
+ Pontuação por célula:
 
- Contador de Minas: Mostra quantas minas faltam ser marcadas (total de minas - bandeiras colocadas).
+ +10 pontos por cada célula segura aberta.
+
+ +50 pontos se abrir uma célula com 0 vizinhos (porque abre várias de uma vez).
+
+ -100 pontos se abrir uma bomba (perde o jogo e os pontos).
+ 
 
 ## Fluxo do Jogo
  1.Inicialização:
@@ -75,7 +74,7 @@
 
  Em caso de derrota, todas as minas são reveladas.
 
- Em caso de vitória, o tempo final é registrado 
+ Em caso de vitória, a pontuação final é registrada 
 
 
 ## Instruções para compilar e executar 

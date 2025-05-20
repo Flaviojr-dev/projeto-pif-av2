@@ -21,8 +21,6 @@
 
  Revelada: Mostra se é segura (número) ou uma mina.
 
- Marcada: O jogador suspeita que há uma mina ali (bandeira).
-
  1.1. Mineração do Campo
  Um número pré-definido de minas (N) é distribuído aleatoriamente pelo tabuleiro.
 

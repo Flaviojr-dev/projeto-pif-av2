@@ -96,7 +96,7 @@ void animarExplosao() {
         "⣿⣿⣿⣿⣿⣿⣿⣿⣯⣴⣾⣟⣼⣿⣷⣿⣷⣦⣽⣿⣿⣿⣿⣿⣿⣿⣿"
     };
     
-    int art_height = 16;
+    int art_height = 15;
     int art_width = 60;
     
     int term_height, term_width;

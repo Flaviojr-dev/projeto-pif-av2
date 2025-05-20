@@ -23,7 +23,7 @@ int l, c;
 int linha_selecionada = 0, coluna_selecionada = 0;
 int game_over = 0;
 int vitoria = 0;
-int pontuacao = 0;
+int pontuacao = 1;
 
 void inicializarJogo() {
     for(l = 0; l < TAM; l++) {
